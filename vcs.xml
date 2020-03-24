@@ -14,6 +14,10 @@
           <option name="url" value="https://zts.ita.pwr.wroc.pl/gitlab/Lukas/" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="ssh://git@zts.ita.pwr.wroc.pl:2222/Lukas/test.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="C:\Users\User\CLionProjects" />
