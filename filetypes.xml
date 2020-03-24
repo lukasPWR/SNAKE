@@ -4,6 +4,7 @@
       <mapping pattern="*.js.flow" type="Flow" />
       <mapping pattern="*.js.flow" type="Flow" />
       <mapping pattern="main.cpp" type="PLAIN_TEXT" />
+      <mapping ext="o" type="PLAIN_TEXT" />
     </extensionMap>
   </component>
 </application>
