@@ -2,12 +2,15 @@
 #include <vector>
 #include "MinesweaperBoard.h"
 #include <iostream>
+#include "MSBoardTextView.h"
 using namespace std;
 
 int main() {
-MinesweeperBoard board(10,10, HARD);
-MinesweeperBoard game(10,10,HARD);
-game.debug_display();
-cout << game.getBoardHeight() << endl << game.getBoardWidth()<< endl << game.getMineCount();
-    return 0;
+    MinesweeperBoard board (20, 10, GameMode::DEBUG);
+    MSBoardTextView view ( board );
+    view.display();
+    board.revealField(0,5);
+    view.display();
+
+
 }

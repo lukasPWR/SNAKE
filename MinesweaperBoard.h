@@ -7,7 +7,7 @@
 #include <vector>
 using namespace std;
 enum GameMode  { DEBUG, EASY, NORMAL, HARD };
-enum GameState { RUNNING, FINISHED_WIN, FINISHED_LOSS };
+enum GameState { START, RUNNING, FINISHED_WIN, FINISHED_LOSS };
 
 
 
@@ -24,6 +24,9 @@ class MinesweeperBoard
     vector<vector<Field>>board;
     int width;
     int height;
+    GameState state;
+    int mine_count;
+
 public:
 
     MinesweeperBoard(int width, int height, GameMode mode);
@@ -34,7 +37,9 @@ public:
     int countMines(int x, int y) const;
     void toggleFlag(int x, int y);
     void revealField(int x, int y);
+    bool isOutside(int x, int y) const;
     bool isRevealed(int x, int y) const;
+    bool hasFlag(int x, int y) const;
     GameState getGameState() const;
     char getFieldInfo(int x, int y) const;
 
