@@ -6,11 +6,12 @@
 using namespace std;
 
 int main() {
-    MinesweeperBoard board (20, 10, GameMode::DEBUG);
+    MinesweeperBoard board (20, 10, GameMode::EASY);
     MSBoardTextView view ( board );
     view.display();
     board.revealField(0,5);
     view.display();
+
 
 
 }
