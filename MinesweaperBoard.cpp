@@ -9,10 +9,10 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode):height(
 {
     state=START;
     float percent=0;
-    board.resize(200);
+    board.resize(100);
     for(int i = 0; i < board.size(); i++)
     {
-        board.at(i).resize(200);
+        board.at(i).resize(100);
     }
     for(int i = 0; i < board.size(); i++)
     {
@@ -34,11 +34,20 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode):height(
     {
         percent = 0.3;
     }
-    else if(mode == DEBUG)
+    for(int i=0; i<width; i++)
     {
-        for(int i = 0; i < 200; i++)
+        for(int j=0; j<height; j++ )
         {
-            for(int j = 0; j < 200; j++)
+            board.at(i).at(j).hasFlag=false;
+            board.at(i).at(j).hasMine=false;
+            board.at(i).at(j).isRevealed=false;
+        }
+    }
+     if(mode == DEBUG)
+    {
+        for(int i = 0; i < 100; i++)
+        {
+            for(int j = 0; j < 100; j++)
             {
                 if(i == j)
                 {
@@ -55,13 +64,22 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode):height(
             }
         }
     }
+     mine_count=width*height*percent;
+     int mmine_amount=mine_count;
+     while(mmine_amount>0)
+     {
+         int a= rand()%height;
+         int b= rand()%width;
+         if(!board.at(a).at(b).hasMine)
+         {
+             board.at(a).at(b).hasMine=rand()%2;
+             if(board.at(a).at(b).hasMine)
+                 mmine_amount--;
+         }
+     }
 
 
-    board.resize(this->height);
-    for(int i = 0; i < this ->height; i++)
-    {
-        board.at(i).resize(this -> width);
-    }
+
 
 }
 
