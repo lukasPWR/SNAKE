@@ -97,39 +97,43 @@ int MinesweeperBoard::getBoardWidth() const
 
 int MinesweeperBoard::getMineCount() const
 {
-    int mines = 0;
+    int minesAmount = 0;
     for(int i = 0; i < board.size(); i++)
     {
         for(int j = 0; j < board.at(i).size(); j++)
         {
             if(board.at(i).at(j).hasMine)
             {
-                mines++;
+                minesAmount++;
             }
         }
     }
-    return mines;
+    return minesAmount;
 }
 
 
 int MinesweeperBoard::countMines(int x, int y) const
 {
-int amount_mines=0;
-if(board.at(y).at(x).isRevealed || isOutside(x,y))
-{
-    return -1;
-}
-else
-    for(int i=0; i<2;i++)
-    {
-        for(int j=0;j<2; j++)
+        int licznik = 0;
+        if(isOutside(x, y))
+            return -1;
+        for(int i = -1; i < 2; i++)
         {
-            if(board.at(y-1+i).at(x+j-1).hasMine)
-                amount_mines++;
+            for(int j = -1; j < 2; j++)
+            {
+                if(i == 0 & j == 0)
+                {
+
+                }
+                else if(!isOutside(x + j, y + i)  && board.at(y + i).at(x + j).hasMine)
+                {
+                    licznik++;
+                }
+            }
         }
+        return licznik;
     }
-    return amount_mines;
-}
+
 
 
 
@@ -152,24 +156,29 @@ bool MinesweeperBoard::isOutside(int x, int y) const
 }
 bool MinesweeperBoard::hasFlag(int x, int y) const
 {
-    if (isOutside(x,y)|| board.at(y).at(x).isRevealed|| !board.at(y).at(x).hasFlag)
+    if (isOutside(x,y)|| board.at(y).at(x).isRevealed|| !board.at(y).at(x).hasFlag) {
         return false;
-    return board.at(y).at(x).hasFlag;
+    }
+    if (board.at(y).at(x).hasFlag)
+    return true;
 }
 
-void MinesweeperBoard::toggleFlag(int x, int y)
-{
-    if (isOutside(x,y)||isRevealed(x,y)||state==FINISHED_WIN||state==FINISHED_LOSS)
-        return;
-    else if (!isRevealed(x,y) && hasFlag(x,y))
-        board.at(y).at(x).hasMine = false;
-    else if (!isRevealed(x,y) && !hasFlag(x,y))
-        board.at(y).at(x).hasMine= true;
-}
+void::MinesweeperBoard::toggleFlag(int x, int y)
+    {
+        if (board.at(y).at(x).isRevealed == 0)
+        {
+            board.at(y).at(x).hasFlag = 1;
+        }
+        if ((board.at(y).at(x).isRevealed == 1) || (x >= height || y >= width) || (state == FINISHED_WIN || state == FINISHED_LOSS))
+        {
+            return;
+        }
+    }
+
 void MinesweeperBoard::revealField(int x, int y)
 {
     if (isRevealed(x,y))
-        return;
+        return ;
     if (state==RUNNING && !board.at(y).at(x).hasMine)
     {
         board.at(y).at(x).isRevealed = true;
@@ -201,55 +210,72 @@ void MinesweeperBoard::revealField(int x, int y)
 }
 GameState MinesweeperBoard::getGameState() const
 {
-    GameState state;
-    int mines_1=mine_count;
-    int mines_2=mine_count;
-    for (int i=0;i<getBoardHeight(); i++)
+    int flags = 0;
+    int flagsOnMine = 0;
+    int fieldsWithoutMine = 0;
+    fieldsWithoutMine = width * height - getMineCount();
+    int revealedFields = 0;
+    for (int i = 0; i < height; i++)
     {
-        for (int j=0;j<getBoardWidth(); j++)
+        for (int j = 0; j < width; j++)
         {
-            if (board.at(i).at(j).hasMine && isRevealed(j, i))
-
-                return state=FINISHED_LOSS;
-
-            else if (board.at(i).at(j).hasMine && hasFlag(j, i))
+            if (board.at(i).at(j).isRevealed == 1 && board.at(i).at(j).hasMine == 1)
             {
-                if (!board.at(i).at(j).hasMine && hasFlag(j, i))
-                    mines_1++;
-                mines_1--;
-                if (mines_1==0)
-                    return state=FINISHED_WIN;
+                return FINISHED_LOSS;
             }
-            else if (!isRevealed(j, i) && board.at(i).at(j).hasMine)
+            if (board.at(i).at(j).hasFlag == 1)
             {
-                mines_2--;
-                if (mines_2==0)
+                flags++;
+            }
+            if (board.at(i).at(j).hasFlag == 1 && board.at(i).at(j).hasMine == 1)
+            {
+                flagsOnMine++;
+                if (flagsOnMine == flags && flagsOnMine == getMineCount())
                 {
-                    return  state=FINISHED_WIN;
+                    return FINISHED_WIN;
                 }
             }
-            else
-                return state=RUNNING;
+            if (board.at(i).at(j).isRevealed == 1 && board.at(i).at(j).hasMine == 0)
+            {
+                revealedFields++;
+                if (revealedFields == fieldsWithoutMine)
+                {
+                    return FINISHED_WIN;
+                }
+            }
         }
     }
-    abort();
+    return state;
+
 }
 char MinesweeperBoard::getFieldInfo(int x, int y) const
 {
-    if (isOutside(x,y))
+    if (x >= height || y >= width)
+    {
         return '#';
-    else if (!isRevealed(x,y) && hasFlag(x,y))
+    }
+    if (board.at(y).at(x).isRevealed == 0 && board.at(y).at(x).hasFlag == 1)
+    {
         return 'F';
-    else if (!isRevealed(x,y) && !hasFlag(x,y))
+    }
+    if (board.at(y).at(x).isRevealed == 0 && board.at(y).at(x).hasFlag == 0)
+    {
         return '_';
-    else if (isRevealed(x,y) && board.at(y).at(x).hasMine)
+    }
+    if (board.at(y).at(x).isRevealed == 1 && board.at(y).at(x).hasMine == 1)
+    {
         return 'x';
-    else if (isRevealed(x,y) && countMines(x,y)==0)
-        return ' ';
-    else if (isRevealed(x,y) && countMines(x,y)!=0)
-        return countMines(x,y);
-    else
-        return '?';
+    }
+    if (board.at(y).at(x).isRevealed == 1 && countMines(x, y) == 0)
+    {
+        return 'r';
+    }
+    if (board.at(y).at(x).isRevealed == 1 && countMines(x, y) != 0)
+    {
+        int tmpx = 0;
+        tmpx = countMines(x, y);
+        return '0' + tmpx;
+    }
 }
 void MinesweeperBoard::debug_display() const
 {

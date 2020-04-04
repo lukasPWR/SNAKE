@@ -44,4 +44,4 @@ public:
     char getFieldInfo(int x, int y) const;
 
 };
-#endif //PO_L2_MINESWEAPERBOARD_H
+#endif //PO_L2_MINESWEAPERBOARD_

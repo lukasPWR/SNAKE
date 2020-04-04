@@ -5,25 +5,28 @@
 #include "MSBoardTextView.h"
 #include <iostream>
 
-MSBoardTextView::MSBoardTextView(MinesweeperBoard &board): board(board)
+MSBoardTextView::MSBoardTextView(MinesweeperBoard &b): board(b)
 {
-    this->board=board;
+
 }
-void MSBoardTextView::showField(int x, int y) const
-{
-    char a=board.getFieldInfo(x,y);
-    std::cout << a <<endl;
-}
+
 void  MSBoardTextView::display() const
 {
-    int h=board.getBoardHeight();
-    int w=board.getBoardWidth();
-    for (int i=0;i<h; i++)
-    {
-        for(int j=0;j<w; j++)
-        {
-            showField(j,i);
-        }
-    }
+   std::cout <<"X ";
+   for ( int k = 0; k<board.getBoardWidth(); k++)
+   {
+       std:: cout<<" "<< k << " ";
+   }
+   std:: cout << std:: endl;
 
+   for( int i = 0; i<board.getBoardHeight(); i++)
+   {
+       std::cout << i <<" ";
+       for(int j = 0; j <board.getBoardWidth(); j++)
+       {
+           std::cout << "["<< board.getFieldInfo(i,j) <<"]";
+       }
+       std::cout << std::endl;
+   }
+    std::cout << std::endl;
 }
