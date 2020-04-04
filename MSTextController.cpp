@@ -16,7 +16,7 @@ void MSTextController::play()
     int row, column;
     char move;
     int t = 1;
-do
+    do
     {
         view.display();
         std::cout << "row: ";
@@ -39,14 +39,14 @@ do
         t++;
     }while (board.getGameState() == RUNNING);
     {
-    if(board.getGameState() == FINISHED_LOSS)
-    {
-        std::cout << "Game Over" << endl;
-    }
-    if (board.getGameState() == FINISHED_WIN)
-    {
-        std::cout <<"Gz" << std::endl;
-    }
+        if(board.getGameState() == FINISHED_LOSS)
+        {
+            std::cout << "Game Over" << endl;
+        }
+        if (board.getGameState() == FINISHED_WIN)
+        {
+            std::cout <<"Gz" << std::endl;
+        }
     }
 
 

@@ -43,7 +43,7 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode):height(
             board.at(i).at(j).isRevealed=false;
         }
     }
-     if(mode == DEBUG)
+    if(mode == DEBUG)
     {
         for(int i = 0; i < 100; i++)
         {
@@ -64,19 +64,19 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode):height(
             }
         }
     }
-     mine_count=width*height*percent;
-     int mmine_amount=mine_count;
-     while(mmine_amount>0)
-     {
-         int a= rand()%height;
-         int b= rand()%width;
-         if(!board.at(a).at(b).hasMine)
-         {
-             board.at(a).at(b).hasMine=rand()%2;
-             if(board.at(a).at(b).hasMine)
-                 mmine_amount--;
-         }
-     }
+    mine_count=width*height*percent;
+    int mmine_amount=mine_count;
+    while(mmine_amount>0)
+    {
+        int a= rand()%height;
+        int b= rand()%width;
+        if(!board.at(a).at(b).hasMine)
+        {
+            board.at(a).at(b).hasMine=rand()%2;
+            if(board.at(a).at(b).hasMine)
+                mmine_amount--;
+        }
+    }
 
 
 
@@ -114,25 +114,25 @@ int MinesweeperBoard::getMineCount() const
 
 int MinesweeperBoard::countMines(int x, int y) const
 {
-        int licznik = 0;
-        if(isOutside(x, y))
-            return -1;
-        for(int i = -1; i < 2; i++)
+    int licznik = 0;
+    if(isOutside(x, y))
+        return -1;
+    for(int i = -1; i < 2; i++)
+    {
+        for(int j = -1; j < 2; j++)
         {
-            for(int j = -1; j < 2; j++)
+            if(i == 0 & j == 0)
             {
-                if(i == 0 & j == 0)
-                {
 
-                }
-                else if(!isOutside(x + j, y + i)  && board.at(y + i).at(x + j).hasMine)
-                {
-                    licznik++;
-                }
+            }
+            else if(!isOutside(x + j, y + i)  && board.at(y + i).at(x + j).hasMine)
+            {
+                licznik++;
             }
         }
-        return licznik;
     }
+    return licznik;
+}
 
 
 
@@ -160,20 +160,20 @@ bool MinesweeperBoard::hasFlag(int x, int y) const
         return false;
     }
     if (board.at(y).at(x).hasFlag)
-    return true;
+        return true;
 }
 
 void::MinesweeperBoard::toggleFlag(int x, int y)
+{
+    if (board.at(y).at(x).isRevealed == 0)
     {
-        if (board.at(y).at(x).isRevealed == 0)
-        {
-            board.at(y).at(x).hasFlag = 1;
-        }
-        if ((board.at(y).at(x).isRevealed == 1) || (x >= height || y >= width) || (state == FINISHED_WIN || state == FINISHED_LOSS))
-        {
-            return;
-        }
+        board.at(y).at(x).hasFlag = 1;
     }
+    if ((board.at(y).at(x).isRevealed == 1) || (x >= height || y >= width) || (state == FINISHED_WIN || state == FINISHED_LOSS))
+    {
+        return;
+    }
+}
 
 void MinesweeperBoard::revealField(int x, int y)
 {
@@ -197,7 +197,7 @@ void MinesweeperBoard::revealField(int x, int y)
             }
         }
     }
-   state=RUNNING;
+    state=RUNNING;
     if (board.at(y).at(x).hasMine)
     {
         state = FINISHED_LOSS;

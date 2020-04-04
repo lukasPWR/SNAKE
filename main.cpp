@@ -7,10 +7,10 @@
 using namespace std;
 
 int main() {
-        MinesweeperBoard board (20, 10, GameMode::EASY);
-        MSBoardTextView view ( board );
-        MSTextController ctrl ( board, view );
-        ctrl.play();
+    MinesweeperBoard board (20, 10, GameMode::EASY);
+    MSBoardTextView view ( board );
+    MSTextController ctrl ( board, view );
+    ctrl.play();
 
 
 
