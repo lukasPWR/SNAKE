@@ -2,6 +2,7 @@
 // Created by User on 09.03.2020.
 //
 
+
 #ifndef PO_L2_MINESWEAPERBOARD_H
 #define PO_L2_MINESWEAPERBOARD_H
 #include <vector>
@@ -44,4 +45,4 @@ public:
     char getFieldInfo(int x, int y) const;
 
 };
-#endif //PO_L2_MINESWEAPERBOARD_H
+#endif //PO_L2_MINESWEAPERBOARD_

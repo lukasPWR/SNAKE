@@ -8,12 +8,11 @@
 
 
 class MSBoardTextView
-        {
+{
     MinesweeperBoard &board;
-    void showField(int x,int y) const;
 
 public:
-    MSBoardTextView(MinesweeperBoard &board);
+    explicit MSBoardTextView(MinesweeperBoard &b);
     void display () const;
 
 
@@ -21,3 +20,4 @@ public:
 
 
 #endif //PO_L2_MSBOARDTEXTVIEW_H
+
