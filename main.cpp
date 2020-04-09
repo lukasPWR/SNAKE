@@ -9,7 +9,7 @@
 using namespace std;
 
 int main() {
-    MinesweeperBoard b(10,10,HARD);
+    MinesweeperBoard b(7,4,HARD);
     MSSFMLView mv(b);
     b.toggleFlag(1,1);
     b.revealField(2,3);
@@ -29,7 +29,7 @@ int main() {
 
         }
 
-        w.clear(sf::Color::Magenta);
+        w.clear(sf::Color::Black);
         mv.drawOnWindow(w);
 
         w.display();

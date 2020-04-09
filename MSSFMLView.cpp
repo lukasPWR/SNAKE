@@ -33,11 +33,12 @@ void MSSFMLView::drawOnWindow(sf::RenderWindow &win) {
 
     //odkryte pola
     sf::RectangleShape field(sf::Vector2f(34, 34));
-    //field.setFillColor(sf::Color(98, 98, 98));
+
     //miny
     sf::CircleShape mines(10);
     mines.setFillColor(sf::Color::Black);
     mines.setOrigin(mines.getRadius(), mines.getRadius());
+
     //flagi
     sf::CircleShape flags(10, 3);
     flags.setFillColor(sf::Color::Yellow);
@@ -45,6 +46,7 @@ void MSSFMLView::drawOnWindow(sf::RenderWindow &win) {
     int flag_y = 8;
     flags.setOrigin(flag_x, flag_y);
     flags.setRotation(90);
+    //deklracja fonta
 
     sf::Font font;
     if (!font.loadFromFile("arial-black.ttf")) {
