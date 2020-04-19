@@ -95,7 +95,7 @@ void MSSFMLView::drawOnWindow(sf::RenderWindow &win) {
     win.draw(lines);
     if (board.getGameState() != RUNNING) {
         sf::Font font3;
-        if (!font3.loadFromFile("ariel-black.ttf")) {
+        if (!font3.loadFromFile("arial-black.ttf")) {
             std::cout << "error " << std::endl;
             system("pause");
         }
