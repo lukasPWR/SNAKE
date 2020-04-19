@@ -26,11 +26,13 @@ class MinesweeperBoard
     int width;
     int height;
     GameState state;
+    GameMode  mode;
     int mine_count;
+    void setMines(double part);
 
 public:
 
-    MinesweeperBoard(int width, int height, GameMode mode);
+    MinesweeperBoard(int width, int height, GameMode M);
     void debug_display() const;
     int getBoardWidth() const;
     int getBoardHeight() const;
@@ -43,6 +45,8 @@ public:
     bool hasFlag(int x, int y) const;
     GameState getGameState() const;
     char getFieldInfo(int x, int y) const;
+    void reset_board(int x, int y , GameMode mode);
+
 
 };
 #endif //PO_L2_MINESWEAPERBOARD_
