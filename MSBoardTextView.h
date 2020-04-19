@@ -10,7 +10,6 @@
 class MSBoardTextView
 {
     MinesweeperBoard &board;
-
 public:
     explicit MSBoardTextView(MinesweeperBoard &b);
     void display () const;

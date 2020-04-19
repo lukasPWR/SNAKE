@@ -1,15 +1,25 @@
-//
+
 // Created by User on 09.03.2020.
 //
 
 #include "MinesweaperBoard.h"
 #include <iostream>
 
-MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode):height(height), width(width)
+MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode M):height(height), width(width), mode(M)
+{
+    reset_board(height,width,mode);
+
+
+}
+void MinesweeperBoard::reset_board(int x, int y, GameMode m)
 {
     state=START;
     float percent=0;
     board.resize(100);
+    width=x;
+    height=y;
+    mode=m;
+
     for(int i = 0; i < board.size(); i++)
     {
         board.at(i).resize(100);
@@ -18,7 +28,7 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode):height(
     {
         for(int j = 0; j < board.at(i).size(); j++)
         {
-            this ->board.at(i).at(j).hasMine = false;
+            board.at(i).at(j).hasMine = false;
         }
     }
 
@@ -77,8 +87,6 @@ MinesweeperBoard::MinesweeperBoard(int width, int height, GameMode mode):height(
                 mmine_amount--;
         }
     }
-
-
 
 
 }
@@ -165,6 +173,10 @@ bool MinesweeperBoard::hasFlag(int x, int y) const
 
 void::MinesweeperBoard::toggleFlag(int x, int y)
 {
+    if(isOutside(x,y))
+    {
+        return ;
+    }
     if (board.at(y).at(x).isRevealed == 0)
     {
         board.at(y).at(x).hasFlag = 1;

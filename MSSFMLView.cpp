@@ -93,8 +93,23 @@ void MSSFMLView::drawOnWindow(sf::RenderWindow &win) {
         }
     }
     win.draw(lines);
+    if (board.getGameState() != RUNNING) {
+        sf::Font font3;
+        if (!font3.loadFromFile("courier-new.ttf")) {
+            std::cout << "error " << std::endl;
+            system("pause");
+        }
+
+        sf::Text text3;
+        text3.setFont(font3);
+        text3.setCharacterSize(20);
+        text3.setStyle(sf::Text::Regular);
+        text3.setString("press space to see results");
+        text3.setFillColor(sf::Color::Red);
+        text3.setPosition(360, 750);
+
+        win.draw(text3);
+    }
+
+
 }
-
-
-
-
