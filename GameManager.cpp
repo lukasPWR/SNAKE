@@ -25,6 +25,11 @@ GameManager::GameManager (ScoreViewController &svc,StartScreenController &sc,Min
                 }
                 break;
             case SCORE:
+                if(scoreViewC.isFinished())
+                {
+                    state=START;
+                }
+
                 break;
         }
     }
@@ -59,10 +64,13 @@ void GameManager::draw(sf::RenderWindow &win) {
                 break;
             case SCORE:
                 scoreViewC.draw(win);
-                if (scoreViewC.isFinished())
-                    win.close();
+                if(scoreViewC.isFinished())
+                {
+                    statee();
+                }
                 break;
         }
+
     }
 
 
