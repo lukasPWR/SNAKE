@@ -74,22 +74,26 @@ void MinesweeperBoard::reset_board(int x, int y, GameMode m)
             }
         }
     }
-    mine_count=width*height*percent;
-    int mmine_amount=mine_count;
-    while(mmine_amount>0)
+    int minedFields = 0;
+    minedFields = percent * width*height;
+    int a = 0;
+    int b = 0;
+
+    for (int m1 = 0; m1 < minedFields; m1++)
     {
-        int a= rand()%height;
-        int b= rand()%width;
-        if(!board.at(a).at(b).hasMine)
+        do
         {
-            board.at(a).at(b).hasMine=rand()%2;
-            if(board.at(a).at(b).hasMine)
-                mmine_amount--;
-        }
+            a = rand() % height;
+            b = rand() % width;
+
+        } while (board.at(a).at(b).hasMine == 1);
+
+        board.at(a).at(b).hasMine = 1;
+    }
     }
 
 
-}
+
 
 
 
@@ -122,25 +126,50 @@ int MinesweeperBoard::getMineCount() const
 
 int MinesweeperBoard::countMines(int x, int y) const
 {
-    int licznik = 0;
-    if(isOutside(x, y))
-        return -1;
-    for(int i = -1; i < 2; i++)
+    int mines_around = 0;
+    if(board.at(x).at(y).isRevealed == 0)
     {
-        for(int j = -1; j < 2; j++)
-        {
-            if(i == 0 & j == 0)
-            {
-
-            }
-            else if(!isOutside(x + j, y + i)  && board.at(y + i).at(x + j).hasMine)
-            {
-                licznik++;
-            }
-        }
+        return -1;
     }
-    return licznik;
+    if((x<0) || (x >=getBoardHeight()) ||(y<0) || (y>=getBoardWidth()))
+    {
+        return -1;
+    }
+    if((x!= 0) && (board.at(y-1).at(x).hasMine == true))
+    {
+        mines_around++;
+    }
+    if((x != getBoardHeight()-1) && (board.at(y+1).at(x).hasMine == true))
+    {
+        mines_around++;
+    }
+    if(( y!= 0) && (x!=0) && (board.at(y-1).at(x-1).hasMine == true))
+    {
+        mines_around++;
+    }
+    if((y!=0) && (board.at(y).at(x-1).hasMine ==  true))
+    {
+        mines_around++;
+    }
+    if((y!=0) && (x!=getBoardHeight()-1) && (board.at(y+1).at(x-1).hasMine == true))
+    {
+        mines_around++;
+    }
+    if ((y!= getBoardWidth()- 1) && (x!=0) && (board.at(y-1).at(x+1).hasMine == true))
+    {
+        mines_around++;
+    }
+    if((y!=getBoardWidth()-1) && (board.at(y).at(x+1).hasMine ==  true))
+    {
+        mines_around++;
+    }
+    if((y!=getBoardWidth()-1) && (x!=getBoardHeight()-1) && (board.at(y+1).at(x+1).hasMine ==  true))
+    {
+        mines_around++;
+    }
+    return mines_around;
 }
+
 
 
 

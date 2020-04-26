@@ -19,10 +19,10 @@ void MinesweeperController::handleEvent(sf::Event & event)
             {
                 if(event.mouseButton.button == sf::Mouse::Right)
                 {
-                if((event.mouseButton.y> 35+ i*35) && (event.mouseButton.y< 70+ i*35) && (event.mouseButton.x> 35+ j*35) && (event.mouseButton.x< 70+ j*35) )
-                {
-                    board.toggleFlag(i, j);
-                }
+                    if((event.mouseButton.y> 35+ i*35) && (event.mouseButton.y< 70+ i*35) && (event.mouseButton.x> 35+ j*35) && (event.mouseButton.x< 70+ j*35) )
+                    {
+                        board.toggleFlag(i, j);
+                    }
                 }
                 if(event.mouseButton.button == sf::Mouse::Left)
                 {

@@ -4,13 +4,16 @@
 #include <iostream>
 #include "MSBoardTextView.h"
 #include "MSTextController.h"
+
 #include "MSSFMLView.h"
 #include "MinesweeperController.h"
 
 #include "StartScreen.h"
 #include "StartScreenController.h"
+
 #include "ScoreView.h"
 #include "ScoreViewController.h"
+
 #include "GameManager.h"
 #include <ctime>
 #include <cstdlib>
@@ -39,9 +42,6 @@ int main() {
     sf::RenderWindow w{sf::VideoMode{1100, 800}, "MINESWEEPER"};
 
     w.setFramerateLimit(60);
-    sf::Event event;
-
-    while (w.isOpen()) {
 
         sf::Event event;
 
@@ -69,5 +69,5 @@ int main() {
         return 0;
 
     }
-}
+
 
