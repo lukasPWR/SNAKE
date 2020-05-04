@@ -85,7 +85,7 @@ void MSSFMLView::drawOnWindow(sf::RenderWindow &win) {
             {
                 text_1.setString(board.getFieldInfo(i, j));
                 text_1.setFillColor(sf::Color::Red);
-                text_1.setPosition(x + i * j, y + i * y);
+                text_1.setPosition(x + j * x, y + i * y);
                 win.draw(text_1);
             }
 

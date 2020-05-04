@@ -43,6 +43,7 @@ public:
     bool isOutside(int x, int y) const;
     bool isRevealed(int x, int y) const;
     bool hasFlag(int x, int y) const;
+    bool hasMine(int x, int y) const;
     GameState getGameState() const;
     char getFieldInfo(int x, int y) const;
     void reset_board(int x, int y , GameMode mode);

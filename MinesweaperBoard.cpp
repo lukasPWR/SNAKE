@@ -114,7 +114,7 @@ int MinesweeperBoard::getMineCount() const
     {
         for(int j = 0; j < board.at(i).size(); j++)
         {
-            if(board.at(i).at(j).hasMine)
+            if(board.at(i).at(j).hasMine == 1)
             {
                 minesAmount++;
             }
@@ -127,7 +127,7 @@ int MinesweeperBoard::getMineCount() const
 int MinesweeperBoard::countMines(int x, int y) const
 {
     int mines_around = 0;
-    if(board.at(x).at(y).isRevealed == 0)
+    if(board.at(y).at(x).isRevealed == 0)
     {
         return -1;
     }
@@ -248,6 +248,19 @@ void MinesweeperBoard::revealField(int x, int y)
         board.at(y).at(x).isRevealed= true;
     }
 
+
+
+}
+bool MinesweeperBoard::hasMine(int x, int y) const
+{
+    if ((x >= getBoardHeight() || y >= getBoardWidth()) || (board.at(y).at(x).hasMine == false) || (board.at(y).at(x).isRevealed == true))
+    {
+        return false;
+    }
+    if (board.at(y).at(x).hasMine == true)
+    {
+        return true;
+    }
 }
 GameState MinesweeperBoard::getGameState() const
 {
