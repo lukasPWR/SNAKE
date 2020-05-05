@@ -1,73 +1,47 @@
 #include <iostream>
-#include <vector>
-#include "MinesweaperBoard.h"
-#include <iostream>
-#include "MSBoardTextView.h"
-#include "MSTextController.h"
-
-#include "MSSFMLView.h"
-#include "MinesweeperController.h"
-
-#include "StartScreen.h"
-#include "StartScreenController.h"
-
-#include "ScoreView.h"
-#include "ScoreViewController.h"
-
-#include "GameManager.h"
+#include "SnakeBoard.h"
+#include "SnakeBoardView.h"
 #include <ctime>
-#include <cstdlib>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 using namespace std;
 
 int main() {
-    srand(time(NULL));
+
+    SnakeBoard b(920,920);
+    SnakeBoardView sbv(b);
+    unsigned int width;
+    unsigned int height;
+
+    width = (unsigned)b.getWindowWidth();
+    height = (unsigned)b.getWindowHeight();
 
 
-    MinesweeperBoard b(10, 10, EASY);
+    sf::RenderWindow win{ sf::VideoMode{width, height}, "SNAKE" };
 
+    win.setFramerateLimit(60);
 
+    sf::Event event;
 
-    MSSFMLView mv(b);
-    MinesweeperController mc(mv, b);
-
-    StartScreen sc;
-    StartScreenController ssc(sc, b);
-
-    ScoreView sv(b);
-    ScoreViewController svc(sv);
-
-    GameManager gm(svc, ssc, mc);
-
-
-    sf::RenderWindow w{sf::VideoMode{1100, 800}, "MINESWEEPER"};
-
-    w.setFramerateLimit(60);
+    while (win.isOpen()) {
 
         sf::Event event;
+        while (win.pollEvent(event)) {
 
-        while (w.isOpen()) {
+            if (event.type == sf::Event::Closed)
+                win.close();
 
-            sf::Event event;
-            while (w.pollEvent(event)) {
-
-                if (event.type == sf::Event::Closed)
-                    w.close();
-                b.toggleFlag(0,0);
-                b.revealField(0,0);
-
-                gm.handleEvent(event);
-
-            }
-
-            w.clear();
-
-            gm.draw(w);
-
-            w.display();
         }
 
-        return 0;
 
+        win.clear();
+        sbv.drawOnWindow(win);
+
+        win.display();
     }
 
+    return 0;
 
+
+
+}
