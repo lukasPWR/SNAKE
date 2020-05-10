@@ -2,63 +2,57 @@
 // Created by User on 28.04.2020.
 ////
 
-#ifndef SNAKE_SNAKEBOARD_H
-#define SNAKE_SNAKEBOARD_H
-
-#include <vector>
+#pragma once
 #include <iostream>
-using namespace std;
-enum GameState{RUNNING, FINISHED_LOSS};
-enum Direction{LEFT,RIGHT,UP,DOWN};
+#include <vector>
+using  namespace std;
+
+enum GameState { RUNNING, FINISHED_LOSS };
+enum Direction {RIGHT, LEFT, UP, DOWN};
 
 struct Field
-        {
+{
     bool hasFood;
-    bool hasSnake;
     bool isWall;
-        };
-struct SnakePos
-        {
+    bool hasSnake;
+};
+
+struct snakePosition
+{
     int x;
     int y;
-        };
+};
+
 class SnakeBoard
-        {
+{
     vector<vector<Field>> board;
-    vector<SnakePos> snake_pos;
+    vector <snakePosition> snake_Pos;
+    int winHeight;
+    int winWidth;
     int height;
     int width;
-    int win_height;
-    int win_width;
     GameState state;
     Direction direction;
-
-        public:
-            SnakeBoard(int windowHeight, int windowWidth);
-            void debug_display() const;
-            int getWindowHeight() const{ return win_height;}
-            int getWindowWidth() const {return win_width;}
-            int getBoardHeight() const {return height;}
-            int getBoardWidth() const {return width;}
-            bool hasFood(int x, int y)const;
-            bool hasSnake(int x, int y)const;
-            bool isWall(int x, int y)const;
-            bool isCollision(int x, int y)const;
-            GameState getGameState()const;
-            int getSnakeSize()const;
-            char getFieldInfo(int x, int y)const;
-            void setFood()const;
-            bool isFoodEaten() const;
-            Direction changeDirection(Direction dir);
-            void move() ;
-
-
-
-
-        };
+    void setFeed();
+public:
+    SnakeBoard(int windowHeight, int windowWidth);
+    void debug_display() const;
+    int getWindowHeight() const { return winHeight; }
+    int getWindowWidth() const { return winWidth; }
+    int getBoardHeight() const { return height; }
+    int getBoardWidth() const { return width; }
+    bool hasSnake(int x, int y) const;
+    bool isWall(int x, int y) const;
+    bool hasFood(int x, int y) const;
+    bool isCollision(int x, int y) const;
+    GameState getGameState() const;
+    int getSnakeLength() const;
+    void changeDirection(Direction dir);
+    void move();
+    bool isFoodEaten();
+    char getFieldInfo(int x, int y) const;
+};
 
 
 
 
-
-#endif //SNAKE_SNAKEBOARD_H

@@ -1,55 +1,43 @@
 //
-// Created by User on 19.04.2020.
+// Created by User on 06.05.2020.
 //
 
 #include "ScoreView.h"
-#include "MinesweaperBoard.h"
-#include <iostream>
 
-ScoreView::ScoreView(MinesweeperBoard & b) : board(b) {
-
-    if (!font_1.loadFromFile("arial-black.ttf"))
+ScoreView::ScoreView(SnakeBoard &sb):board(sb)
+{
+    if (!font1.loadFromFile("arial-black.ttf"))
     {
         std::cout << "error " << std::endl;
         system("pause");
     }
-    text_1.setFont(font_1);
-    text_2.setFont(font_1);
-    text_3.setFont(font_1);
+    gameOver.setFont(font1);
+    gameOver.setFillColor(sf::Color::Red);
 
+    if (!font2.loadFromFile("silkscreen.ttf"))
+    {
+        std::cout << "error " << std::endl;
+        system("pause");
+    }
 
-
-    text_1.setFont(font_1);
-    text_1.setCharacterSize(170);
-    text_1.setStyle(sf::Text::Regular);
-    text_1.setString("PORAZKA");
-    text_1.setPosition(150, 200);
-    text_1.setFillColor(sf::Color::Red);
-
-    text_2.setFont(font_1);
-    text_2.setCharacterSize(100);
-    text_2.setStyle(sf::Text::Regular);
-    text_2.setString("Gratulacje!");
-    text_2.setPosition(180, 200);
-    text_2.setFillColor(sf::Color::Red);
-
-    text_3.setFont(font_1);
-    text_3.setCharacterSize(20);
-    text_3.setStyle(sf::Text::Regular);
-    text_3.setString("nacisnij spacje zeby wrocic do menu");
-    text_3.setFillColor(sf::Color::White);
-    text_3.setPosition(360, 550);
+    scoreText.setFont(font2);
+    scoreText.setCharacterSize(board.getWindowHeight() / 50);
+    scoreText.setFillColor(sf::Color::White);
 
 }
 void ScoreView::draw(sf::RenderWindow &win)
 {
-    if(board.getGameState() == FINISHED_WIN)
-    {
-        win.draw(text_2);
-    }
-    if(board.getGameState() == FINISHED_LOSS)
-    {
-        win.draw(text_1);
-    }
-    win.draw(text_3);
+    gameOver.setPosition(board.getWindowWidth() / 6, board.getWindowHeight() / 9);
+    gameOver.setString("Przegrana");
+    gameOver.setCharacterSize(board.getWindowHeight() / 8);
+    win.draw(gameOver);
+
+
+    scoreText.setString("Twoj wynik: " + std::to_string(board.getSnakeLength()));
+    scoreText.setPosition(board.getWindowWidth() / 2.7, board.getWindowHeight() / 1.5);
+    win.draw(scoreText);
+
+    scoreText.setString("nacisnij spacje aby wrocic do menu");
+    scoreText.setPosition(board.getWindowWidth() / 5, board.getWindowHeight() / 1.3);
+    win.draw(scoreText);
 }
