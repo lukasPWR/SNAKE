@@ -2,6 +2,7 @@
 // Created by User on 05.05.2020.
 //
 
+#include <synchapi.h>
 #include "SnakeController.h"
 
 
@@ -13,7 +14,7 @@ SnakeController::SnakeController(SnakeBoardView & v, SnakeBoard & b) : view(v), 
 
 void SnakeController::handleEvent(sf::Event & event)
 {
-    if (event.type == sf::Event::KeyPressed)
+    if (event.type == sf::Event::KeyPressed && board.getGameState()==RUNNING)
     {
         if (event.key.code == sf::Keyboard::D)
         {
@@ -37,6 +38,8 @@ void SnakeController::handleEvent(sf::Event & event)
 
     if (board.getGameState() == FINISHED_LOSS)
     {
+
+
         if (event.type == sf::Event::KeyPressed)
         {
             if (event.key.code == sf::Keyboard::Space)
@@ -45,4 +48,5 @@ void SnakeController::handleEvent(sf::Event & event)
             }
         }
     }
+
 }

@@ -41,6 +41,7 @@ SnakeBoardView::SnakeBoardView(SnakeBoard & b) : board(b)
         system("pause");
 
     }
+
     food.setSize(sf::Vector2f(1.1*(board.getWindowWidth() / board.getBoardWidth()), 1.1*(board.getWindowHeight() / board.getBoardHeight())));
     food.setTexture(&food_txt);
 
@@ -51,7 +52,7 @@ SnakeBoardView::SnakeBoardView(SnakeBoard & b) : board(b)
     }
 
     score.setFont(font);
-    score.setCharacterSize(board.getWindowHeight() / 50);
+    score.setCharacterSize(board.getWindowHeight() / 30);
     score.setFillColor(sf::Color::Black);
     score.setPosition(board.getWindowWidth() / 2.5, 0);
 
@@ -93,7 +94,7 @@ void SnakeBoardView::draw(sf::RenderWindow & w)
     score.setString("Wynik:" + std::to_string(board.getSnakeLength()));
     w.draw(score);
 
-    if (board.getGameState() != RUNNING)
+    if (board.getGameState() == FINISHED_LOSS)
     {
         w.draw(space);
     }

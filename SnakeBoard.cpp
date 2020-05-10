@@ -13,6 +13,7 @@ SnakeBoard::SnakeBoard(int windowHeight, int windowWidth)
     state=RUNNING;
     direction=RIGHT;
     board.resize(100);
+
     for(int i=0; i<board.size();i++)
     {
         board.at(i).resize(100);
@@ -185,16 +186,19 @@ void SnakeBoard::move()// "zerkalem" do https://forum.pasja-informatyki.pl/25083
             snake_Pos.pop_back();
         }
     }
-    else state = FINISHED_LOSS;
+    else
+        {
+        state = FINISHED_LOSS;
+    }
 }
 
 bool SnakeBoard::isFoodEaten()
 {
-    for(int i=0; i<snake_Pos.size();++i)
+    for (int i = 0; i < snake_Pos.size(); ++i)
     {
         if (board.at(snake_Pos[0].y).at(snake_Pos[0].x).hasFood == true)
         {
-            board.at(snake_Pos[0].y).at(snake_Pos[0].x).hasFood == false;
+            board.at(snake_Pos[0].y).at(snake_Pos[0].x).hasFood = false;
             return true;
         }
     }

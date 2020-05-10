@@ -31,6 +31,8 @@ void GameMenager::update()
     }
 
 }
+
+
 void GameMenager::handleEvent(sf::Event &event)
 {
     switch(state) {

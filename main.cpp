@@ -51,7 +51,7 @@ int main() {
             if (event.type == sf::Event::Closed) {
                 w.close();
             }
-                scc.handleEvent(event);
+                gm.handleEvent(event);
 
 
 
@@ -61,7 +61,7 @@ int main() {
 
 
         w.clear();
-        sv.draw(w);
+        gm.draw(w);
 
 
         w.display();

@@ -22,6 +22,7 @@ public:
     GameMenager(SnakeController &snc, MenuController &mc,ScoreController &sc);
     void draw(sf::RenderWindow &win);
     void handleEvent(sf::Event &event);
+    void back();
 
 
 };
