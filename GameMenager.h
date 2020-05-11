@@ -13,16 +13,17 @@
 
 
 class GameMenager {
+    SnakeBoard &board;
     SnakeController &snakeC;
     MenuController &menuC;
     ScoreController &scoreC;
     void update();
     enum GameState {MENU,GAME,SCORE} state;
 public:
-    GameMenager(SnakeController &snc, MenuController &mc,ScoreController &sc);
+    GameMenager(SnakeController &snc, MenuController &mc,ScoreController &sc, SnakeBoard &b);
     void draw(sf::RenderWindow &win);
     void handleEvent(sf::Event &event);
-    void back();
+
 
 
 };

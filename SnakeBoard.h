@@ -33,9 +33,12 @@ class SnakeBoard
     int width;
     GameState state;
     Direction direction;
+    bool finished=false;
     void setFeed();
 public:
     SnakeBoard(int windowHeight, int windowWidth);
+    void reset_Board(int windowHeight,int windowWidth);
+    void play_again();
     void debug_display() const;
     int getWindowHeight() const { return winHeight; }
     int getWindowWidth() const { return winWidth; }

@@ -37,7 +37,7 @@ SnakeBoardView::SnakeBoardView(SnakeBoard & b) : board(b)
 
     if (!food_txt.loadFromFile("images.png"))
     {
-       cout << "error" << endl;
+        cout << "error" << endl;
         system("pause");
 
     }

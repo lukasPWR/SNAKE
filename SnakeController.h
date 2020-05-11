@@ -12,15 +12,17 @@
 class SnakeController {
 
     bool finished = false;
+    bool again = false;
     SnakeBoardView & view;
     SnakeBoard & board;
 
 public:
-     SnakeController(SnakeBoardView & v, SnakeBoard & b);
+    SnakeController(SnakeBoardView & v, SnakeBoard & b);
 public:
     void handleEvent(sf::Event &event);
     void draw(sf::RenderWindow & win) { view.draw(win); }
     bool isFinished() const { return finished; }
+    void playAgain() { board.play_again(); }
+    void setFinishedToFalse() { finished = false; }
 };
 #endif //SNAKE_LUK_SNAKECONTROLLER_H
-

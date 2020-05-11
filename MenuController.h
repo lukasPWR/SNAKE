@@ -18,6 +18,7 @@ public:
     void handleEvent(sf::Event &event);
     void draw(sf::RenderWindow & win) { view.draw(win); }
     bool isFinished() const { return finished; }
+    void setFinishedToFalse() { finished = false; }
 
 };
 

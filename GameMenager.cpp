@@ -4,9 +4,11 @@
 
 #include "GameMenager.h"
 
-GameMenager::GameMenager(SnakeController &snc, MenuController &mc,ScoreController &sc):snakeC(snc), menuC(mc),scoreC(sc)
+GameMenager::GameMenager(SnakeController &snc, MenuController &mc,ScoreController &sc, SnakeBoard &b):snakeC(snc), menuC(mc),scoreC(sc),board(b)
 {
     state=MENU;
+
+
 
 }
 void GameMenager::update()
@@ -26,6 +28,21 @@ void GameMenager::update()
             }
             break;
         case SCORE:
+            if(scoreC.isFinished())
+            {
+                menuC.setFinishedToFalse();
+                state=MENU;
+                snakeC.setFinishedToFalse();
+                snakeC.playAgain();
+
+
+
+                
+
+
+
+            }
+
             break;
 
     }
@@ -47,6 +64,7 @@ void GameMenager::handleEvent(sf::Event &event)
             break;
     }
     update();
+
 }
 void GameMenager::draw(sf::RenderWindow &win)
 {
@@ -60,8 +78,7 @@ void GameMenager::draw(sf::RenderWindow &win)
             break;
         case SCORE:
             scoreC.draw(win);
-            if(scoreC.isFinished())
-                win.close();
             break;
     }
+
 }

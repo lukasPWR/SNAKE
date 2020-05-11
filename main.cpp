@@ -24,7 +24,7 @@ int main() {
     ScoreView sv(sb);
     ScoreController scc(sv);
 
-    GameMenager gm(sc,mc,scc);
+    GameMenager gm(sc,mc,scc,sb);
 
 
 

@@ -1,0 +1,55 @@
+Index: SnakeController.cpp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- SnakeController.cpp	(date 1589116646102)
++++ SnakeController.cpp	(date 1589116646102)
+@@ -3,3 +3,46 @@
+ //
+ 
+ #include "SnakeController.h"
++
++
++
++
++SnakeController::SnakeController(SnakeBoardView & v, SnakeBoard & b) : view(v), board(b)
++{
++}
++
++void SnakeController::handleEvent(sf::Event & event)
++{
++    if (event.type == sf::Event::KeyPressed)
++    {
++        if (event.key.code == sf::Keyboard::D)
++        {
++            board.changeDirection(RIGHT);
++        }
++        if (event.key.code == sf::Keyboard::A)
++        {
++            board.changeDirection(LEFT);
++        }
++        if (event.key.code == sf::Keyboard::W)
++        {
++            board.changeDirection(UP);
++        }
++        if (event.key.code == sf::Keyboard::S)
++        {
++            board.changeDirection(DOWN);
++        }
++    }
++
++
++
++    if (board.getGameState() == FINISHED_LOSS)
++    {
++        if (event.type == sf::Event::KeyPressed)
++        {
++            if (event.key.code == sf::Keyboard::Space)
++            {
++                finished = true;
++            }
++        }
++    }
++}
+\ No newline at end of file

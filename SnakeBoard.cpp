@@ -6,6 +6,11 @@ using namespace std;
 
 SnakeBoard::SnakeBoard(int windowHeight, int windowWidth)
 {
+    reset_Board(windowHeight,windowWidth);
+    setFeed();
+}
+void SnakeBoard::reset_Board(int windowHeight,int windowWidth)
+{
     winHeight=windowHeight;
     winWidth=windowWidth;
     height=winHeight/40;
@@ -46,9 +51,16 @@ SnakeBoard::SnakeBoard(int windowHeight, int windowWidth)
     {
         board.at(snake_Pos[i].y).at(snake_Pos[i].x).hasSnake=true;
     }
-    setFeed();
 }
+void SnakeBoard::play_again()
+{
+    snake_Pos.clear();
+    reset_Board(winHeight,winWidth);
+    setFeed();
 
+
+
+}
 void SnakeBoard::debug_display() const
 {
     for(int i=0;i<height;++i)
@@ -187,7 +199,7 @@ void SnakeBoard::move()// "zerkalem" do https://forum.pasja-informatyki.pl/25083
         }
     }
     else
-        {
+    {
         state = FINISHED_LOSS;
     }
 }
@@ -216,5 +228,3 @@ char SnakeBoard::getFieldInfo(int x, int y) const
         return 'W';
     else return '-';
 }
-
-
